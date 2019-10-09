@@ -14,12 +14,13 @@ import android.util.Log;
  * @version February 2016
  */
 public class PigLocalGame extends LocalGame {
-
+    PigGameState pigState;
     /**
      * This ctor creates a new game state
      */
-    public PigLocalGame() {
+    public PigLocalGame(PigGameState pig) {
         //TODO  You will implement this constructor
+        pigState = pig;
     }
 
     /**
@@ -28,6 +29,9 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected boolean canMove(int playerIdx) {
         //TODO  You will implement this method
+        if (playerIdx == pigState.getPlayerID()) {
+            return true;
+        }
         return false;
     }
 
@@ -39,7 +43,42 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
         //TODO  You will implement this method
+        if (action instanceof PigHoldAction) {
+           if (pigState.getPlayerID() == 1) {
+               pigState.setPlayer1(pigState.getPlayer1() + pigState.getRunningTotal());
+               pigState.setRunningTotal(0);
+           }
+           else {
+               pigState.setPlayer0(pigState.getPlayer0() + pigState.getRunningTotal());
+               pigState.setRunningTotal(0);
+           }
+           //set to other player's turn
+            if (pigState.getPlayerID() == 1) {
+                pigState.setPlayerID(0);
+            } else {
+                pigState.setPlayerID(1);
+            }
+            return true; //if pig hold action is legal
+        } else if (action instanceof PigRollAction) {
+            //set die value to random int 1-6
+            int random = 1 + (int) (Math.random() * (5) + 1); //generate random value
+            pigState.setValueDie(random); //set die to random value
+
+            if (pigState.getValueDie() != 1) {
+                pigState.setRunningTotal(pigState.getRunningTotal() + pigState.getValueDie());
+            } else if (pigState.getValueDie() == 1) {
+                pigState.setRunningTotal(0);
+                if (pigState.getPlayerID() == 1) {
+                    pigState.setPlayerID(0);
+                } else {
+                    pigState.setPlayerID(1);
+                }
+            }
+            return true; //if pig roll action is legal
+        }
+
         return false;
+
     }//makeMove
 
     /**
