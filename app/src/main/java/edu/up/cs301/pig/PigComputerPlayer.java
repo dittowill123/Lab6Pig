@@ -3,6 +3,7 @@ package edu.up.cs301.pig;
 import edu.up.cs301.game.GameComputerPlayer;
 import edu.up.cs301.game.actionMsg.GameAction;
 import edu.up.cs301.game.infoMsg.GameInfo;
+import edu.up.cs301.game.infoMsg.NotYourTurnInfo;
 import edu.up.cs301.game.util.Tickable;
 
 /**
@@ -29,6 +30,16 @@ public class PigComputerPlayer extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         // TODO  You will implement this method
+        if (!(info instanceof PigGameState)){
+            return;
+        }
+        int action = (int)(2*Math.random());
+        if (action == 0){
+            game.sendAction(new PigHoldAction(this));
+        }
+        if (action == 1){
+            game.sendAction(new PigRollAction(this));
+        }
     }//receiveInfo
 
 }

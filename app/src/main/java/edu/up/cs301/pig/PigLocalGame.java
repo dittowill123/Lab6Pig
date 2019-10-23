@@ -18,9 +18,10 @@ public class PigLocalGame extends LocalGame {
     /**
      * This ctor creates a new game state
      */
-    public PigLocalGame(PigGameState pig) {
+    public PigLocalGame() {
         //TODO  You will implement this constructor
-        pigState = pig;
+        super();
+        pigState = new PigGameState();
     }
 
     /**
@@ -29,10 +30,7 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected boolean canMove(int playerIdx) {
         //TODO  You will implement this method
-        if (playerIdx == pigState.getPlayerID()) {
-            return true;
-        }
-        return false;
+        return playerIdx == pigState.getPlayerID(); //check if player id matches player who can move
     }
 
     /**
@@ -87,6 +85,7 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         //TODO  You will implement this method
+        p.sendInfo(new PigGameState(pigState));
     }//sendUpdatedSate
 
     /**
@@ -99,6 +98,12 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         //TODO  You will implement this method
+        if (pigState.getPlayer1() >= 50){
+            return "Player 1 has won the game with " + pigState.getPlayer1() + " points";
+        }
+        else if (pigState.getPlayer0() >= 50){
+            return "Player 2 has won the game with " + pigState.getPlayer0() + " points";
+        }
         return null;
     }
 

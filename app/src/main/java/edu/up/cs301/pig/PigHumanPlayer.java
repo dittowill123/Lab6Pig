@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
+import static android.graphics.Color.RED;
+
 /**
  * A GUI for a human to play Pig. This default version displays the GUI but is incomplete
  *
@@ -61,6 +63,16 @@ public class PigHumanPlayer extends GameHumanPlayer implements OnClickListener {
     @Override
     public void receiveInfo(GameInfo info) {
         //TODO You will implement this method to receive state objects from the game
+
+        if (!(info instanceof PigGameState)){
+            //if info is not instance of pig gamestate flash screen
+            flash(Color.RED, 1000);
+            return;
+        }
+
+        if (getPlayerID() == 0) {
+            playerScoreTextView = info.getPlayer0();
+        }
     }//receiveInfo
 
     /**
