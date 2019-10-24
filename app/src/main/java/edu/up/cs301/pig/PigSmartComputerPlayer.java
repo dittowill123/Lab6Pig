@@ -40,7 +40,7 @@ public class PigSmartComputerPlayer extends GameComputerPlayer {
             if ((pig.getPlayer0() + pig.getRunningTotal()) >= 50){ //if game is won
                 game.sendAction(new PigHoldAction(this));
             }
-            if (pig.getPlayer0() < 35 && pig.getPlayer1() >= 35 && pig.getRunningTotal() < 13){
+            if (pig.getPlayer0() < 35 && pig.getPlayer1() >= 35 && pig.getRunningTotal() < 13){ //if opponent is close to winning, roll until 13
                 game.sendAction(new PigRollAction(this));
             }
             if (pig.getPlayer0() >= 35 && (pig.getPlayer0() + pig.getRunningTotal()) - pig.getPlayer1() <= 8) { //if lead is over 10
@@ -61,7 +61,7 @@ public class PigSmartComputerPlayer extends GameComputerPlayer {
             if (pig.getPlayer1() >= 35 && (pig.getPlayer1() + pig.getRunningTotal()) - pig.getPlayer0() <= 8) { //if lead is over 10
                 game.sendAction(new PigRollAction(this));
             }
-            if (pig.getRunningTotal() < 10){ 
+            if (pig.getRunningTotal() < 10){
                 game.sendAction(new PigRollAction(this));
             }
             game.sendAction(new PigHoldAction(this));
