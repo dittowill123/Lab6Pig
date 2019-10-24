@@ -7,6 +7,8 @@ import edu.up.cs301.game.infoMsg.GameState;
 
 import android.util.Log;
 
+import java.util.Random;
+
 /**
  * class PigLocalGame controls the play of the game
  *
@@ -59,7 +61,9 @@ public class PigLocalGame extends LocalGame {
             return true; //if pig hold action is legal
         } else if (action instanceof PigRollAction) {
             //set die value to random int 1-6
-            int random = 1 + (int) (Math.random() * (5) + 1); //generate random value
+
+            double rand = (Math.random() * ((6 - 1) + 1)) + 1; //generate random value 1-6
+            int random = (int)rand; //convert random value to int
             pigState.setValueDie(random); //set die to random value
 
             if (pigState.getValueDie() != 1) {
