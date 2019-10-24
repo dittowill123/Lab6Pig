@@ -98,11 +98,11 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         //TODO  You will implement this method
-        if (pigState.getPlayer1() >= 50){
-            return "Player 1 has won the game with " + pigState.getPlayer1() + " points";
+        if (pigState.getPlayer0() >= 50){
+            return "Player 1 has won the game with " + pigState.getPlayer0() + " points";
         }
-        else if (pigState.getPlayer0() >= 50){
-            return "Player 2 has won the game with " + pigState.getPlayer0() + " points";
+        else if (pigState.getPlayer1() >= 50){
+            return "Player 2 has won the game with " + pigState.getPlayer1() + " points";
         }
         return null;
     }
